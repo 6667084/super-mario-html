@@ -300,6 +300,7 @@ function buildLevel(){
 let player, camX, score, coinCount, timeLeft, lives, state, stateT, invT, bigT;
 function reset(full){
   if(full){ score=0; coinCount=0; lives=3; }
+  coins=[]; goombas=[];
   buildLevel();
   items=[]; parts=[]; popups=[];
   player={x:3*TS,y:26*TS,w:12,h:16,vx:0,vy:0,onGround:false,face:1,big:false,dead:false};
@@ -564,7 +565,6 @@ function drawTile(t,x,y){
       break;
     case T.FLAG:
       ctx.fillStyle="#c0c0c0"; ctx.fillRect(x+6,y,4,TS);
-      if(y===10*1){} // pole
       break;
     case T.CASTLE:
       ctx.fillStyle="#c84c0c"; ctx.fillRect(x,y,TS,TS);
@@ -605,7 +605,7 @@ function render(){
   for(const c of coins){
     const w=Math.abs(Math.cos(c.t))*6+2;
     ctx.fillStyle="#ffd23f";
-    ctx.fillRect(c.x+4-w/2-camX+ (4-w/2),c.y,w,8);
+    ctx.fillRect(c.x+4-w/2-camX,c.y,w,8);
     ctx.fillStyle="#fff";
     ctx.fillRect(c.x+4-w/4-camX,c.y+2,Math.max(1,w/3),4);
   }
